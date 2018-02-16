@@ -71,7 +71,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-    	//launch the application window
+    	//launch the application window 
         launch(args);
     }
 }
