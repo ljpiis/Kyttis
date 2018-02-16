@@ -40,6 +40,8 @@ public class Juna {
         	paikat[i]=false;
         }
     }
+    
+    //getterit ja setterit
 
     public String getnimi() {
         return nimi;
