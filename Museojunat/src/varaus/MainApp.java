@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private Scene scene1, scene2;
     
 
     @Override
@@ -37,9 +38,13 @@ public class MainApp extends Application {
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+            scene1 = new Scene(rootLayout);
+            primaryStage.setScene(scene1);
             primaryStage.show();
+            
+            
+            //scene2 = new Scene(300, 300)
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
