@@ -21,7 +21,7 @@ public class MainController {
 	 */
 	
 	public void changeScene(ActionEvent event) throws IOException {
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("view/UserView.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("view/UserView00.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		
 		//This line gets the Stage information

@@ -56,18 +56,18 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <PasswordField layoutX="230.0" layoutY="204.0" promptText="Salasana" />
-            <TextField layoutX="230.0" layoutY="165.0" promptText="Tunnus" />
+            <TextField layoutX="230.0" layoutY="165.0" prefHeight="25.0" prefWidth="149.0" promptText="Tunnus" />
             <Button layoutX="230.0" layoutY="256.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="149.0" text="Kirjaudu" textFill="#0ea17d">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="17.0" />
                </font>
             </Button>
-            <Text fill="#0ea17d" layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Museojuna -yhdistys" wrappingWidth="537.13671875">
+            <Text fill="#0ea17d" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Museojuna -yhdistys" textAlignment="CENTER" wrappingWidth="640.0">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="48.0" />
                </font>
             </Text>
-            <Text layoutX="173.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tervetuloa kyytiin museojuniin! &#10;Kirjauduthan ensin tunnuksillasi!">
+            <Text layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tervetuloa kyytiin museojuniin! &#10;Kirjauduthan ensin tunnuksillasi!" textAlignment="CENTER" wrappingWidth="640.0000001490116">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="17.0" />
                </font>
