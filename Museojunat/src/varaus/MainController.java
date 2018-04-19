@@ -14,6 +14,7 @@ public class MainController {
 	
 	// --------- Methods for changing the scene, when a button is clicked ---------
 	
+	
 	//naming convention: changeTo[wanted scene name], for example: changeToLogin
 	
 	public void changeToUserView(ActionEvent event) throws IOException {
@@ -25,7 +26,7 @@ public class MainController {
 	}
 	
 	
-	// A general code for changing the scene in the window. Parameters are the ActionEvent and the
+	// A general code for changing the scene in the window. Parameters are the ActionEvent (button click) and the
 	//name of the scene that you want to display.
 	public void changeScene(ActionEvent event, String sceneName) throws IOException {
 		

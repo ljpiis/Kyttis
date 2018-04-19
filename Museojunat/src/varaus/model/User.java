@@ -8,6 +8,7 @@ package varaus.model;
 	import javafx.beans.property.SimpleObjectProperty;
 	import javafx.beans.property.SimpleStringProperty;
 	import javafx.beans.property.StringProperty;
+import varaus.MainApp;
 
 	/**
 	 * Model class for a User.
@@ -17,25 +18,39 @@ package varaus.model;
 	 */
 	public class User {
 
-	    private final StringProperty firstName;
-	    private final StringProperty lastName;
-	    private final StringProperty street;
-	    private final IntegerProperty postalCode;
-	    private final StringProperty city;
-	    private final ObjectProperty<LocalDate> birthday;
+	    private String firstName;
+	    private String lastName;
+	    private String street;
+	    private String postalCode;
+	    private String city;
+	    private String birthday;
 	    
-	    private String tunnus;
-	    private String salasana; 
-	    private boolean yp; // ylläpitäjä vai ei
+	    private String userId;
+	    private String password; 
+	    private boolean admin; // ylläpitäjä vai ei
+	    private boolean loggedIn; //onko käyttäjä kirjautunut vai ei
+	    
 
 	    /**
 	     * Default constructor.
 	     */
 	    public User() {
-	        this(null, null);
-	        tunnus = " ";
-	        salasana = "0";
-	        yp = false;
+	        this.userId = "";
+	        this.password = "";
+	    }
+	    
+	    public User(String firstName, String lastName, String street,String postalCode, String city, String birthday, String userId, String password, boolean admin) {
+	    	
+	    	this.firstName = firstName;
+	    	this.lastName = lastName;
+	    	this.street = street;
+	    	this.postalCode = postalCode;
+	    	this.city = city;
+	    	this.birthday = birthday;
+	    	this.userId = userId;
+	    	this.password = password;
+	    	this.admin = admin;
+	    	
 	    }
 
 	    /**
@@ -43,21 +58,15 @@ package varaus.model;
 	     * Luo tavallisen käyttäjän
 	     * ei vielä osaa tarkistaa, onko tunnus jo käytössä
 	     * salasana2 lisäksi, niin voisi varmistaa et salasana tulee kaksi kertaa..?
-	     * @param tunnus
-	     * @param salasana
+	     * @param userId
+	     * @param password
 	     */
-	    public User(String tunnus, String salasana){
-	        this.tunnus = tunnus;
-	        this.salasana = salasana;
-	        yp = false;
+	    public User(String userId, String password){
+	        this.userId = userId;
+	        this.password = password;
+	        this.admin = false;
 	        
-	        this.firstName = new SimpleStringProperty("Kalle");
-	        this.lastName = new SimpleStringProperty("Tavis");
-	        	
-	        this.street = new SimpleStringProperty("some street");
-	        this.postalCode = new SimpleIntegerProperty(1234);
-	        this.city = new SimpleStringProperty("some city");
-	        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+	        
 	    }
 	    
 	    
@@ -68,90 +77,100 @@ package varaus.model;
 	     * @param lastName
 	     */
 	    public User(String firstName, String lastName, String tunnus) {
-	        this.firstName = new SimpleStringProperty(firstName);
-	        this.lastName = new SimpleStringProperty(lastName);
-
-	        // Some initial dummy data, just for convenient testing.
-	        this.street = new SimpleStringProperty("some street");
-	        this.postalCode = new SimpleIntegerProperty(1234);
-	        this.city = new SimpleStringProperty("some city");
-	        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
 	    }
 	    
-	    //---------------------------------------- Getterit ja setterit 
-
-	    public String getFirstName() {
-	        return firstName.get();
+	    
+	    //METHODS
+	    
+	    public boolean changePassword(String newPassword) {
+	    	this.setPassword(newPassword);
+	    	return true;
 	    }
+	    
+	    
+	    //GETTERS AND SETTERS
 
-	    public void setFirstName(String firstName) {
-	        this.firstName.set(firstName);
-	    }
+		public String getFirstName() {
+			return firstName;
+		}
 
-	    public StringProperty firstNameProperty() {
-	        return firstName;
-	    }
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
 
-	    public String getLastName() {
-	        return lastName.get();
-	    }
+		public String getLastName() {
+			return lastName;
+		}
 
-	    public void setLastName(String lastName) {
-	        this.lastName.set(lastName);
-	    }
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
 
-	    public StringProperty lastNameProperty() {
-	        return lastName;
-	    }
+		public String getStreet() {
+			return street;
+		}
 
-	    public String getStreet() {
-	        return street.get();
-	    }
+		public void setStreet(String street) {
+			this.street = street;
+		}
 
-	    public void setStreet(String street) {
-	        this.street.set(street);
-	    }
+		public String getPostalCode() {
+			return postalCode;
+		}
 
-	    public StringProperty streetProperty() {
-	        return street;
-	    }
+		public void setPostalCode(String postalCode) {
+			this.postalCode = postalCode;
+		}
 
-	    public int getPostalCode() {
-	        return postalCode.get();
-	    }
+		public String getCity() {
+			return city;
+		}
 
-	    public void setPostalCode(int postalCode) {
-	        this.postalCode.set(postalCode);
-	    }
+		public void setCity(String city) {
+			this.city = city;
+		}
 
-	    public IntegerProperty postalCodeProperty() {
-	        return postalCode;
-	    }
+		public String getBirthday() {
+			return birthday;
+		}
 
-	    public String getCity() {
-	        return city.get();
-	    }
+		public void setBirthday(String birthday) {
+			this.birthday = birthday;
+		}
 
-	    public void setCity(String city) {
-	        this.city.set(city);
-	    }
+		public String getUserId() {
+			return userId;
+		}
 
-	    public StringProperty cityProperty() {
-	        return city;
-	    }
+		public void setUserId(String userId) {
+			this.userId = userId;
+		}
 
-	    public LocalDate getBirthday() {
-	        return birthday.get();
-	    }
+		public String getPassword() {
+			return password;
+		}
 
-	    public void setBirthday(LocalDate birthday) {
-	        this.birthday.set(birthday);
-	    }
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	    public ObjectProperty<LocalDate> birthdayProperty() {
-	        return birthday;
-	    }
+		public boolean isAdmin() {
+			return admin;
+		}
+
+		public void setAdmin(boolean admin) {
+			this.admin = admin;
+		}
+
+		public boolean isLoggedIn() {
+			return loggedIn;
+		}
+
+		public void setLoggedIn(boolean loggedIn) {
+			this.loggedIn = loggedIn;
+		}
 	}
-	
-	
-	
+	    
+	    
+	    
+
