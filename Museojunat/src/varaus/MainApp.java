@@ -2,9 +2,7 @@
 
 package varaus;
 
-import varaus.view.*;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -45,7 +44,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -68,7 +67,7 @@ public class MainApp extends Application {
         try {
             // Load ruutu00.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/Ruutu00.fxml"));
+            loader.setLocation(MainApp.class.getResource("Ruutu00.fxml"));
             AnchorPane ruutu00 = (AnchorPane) loader.load();
 
             // Set ruutu00 into the center of root layout.
@@ -88,7 +87,7 @@ public class MainApp extends Application {
     
     //*** OBJECTS USED IN THE PROGRAMME ***
     
-    static HashMap<String, User> clients = new HashMap<String, User>();
+    static HashMap<String, User> customers = new HashMap<String, User>();
     static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
     static UserThread userThread;
     
@@ -99,12 +98,8 @@ public class MainApp extends Application {
     public static boolean logIn(String username, String password) {
     	
     	//check if the password is correct
-    	if (clients.get(username).getPassword().equals(password)) {
+    	if (customers.get(username).getPassword().equals(password)) {
     		System.out.println("Login successful");
-    		userThread = new UserThread(clients.get(username), true);
-    		System.out.println("Starting the thread...");
-    		//the next line is blocked for testing purposes
-    		//userThread.run();
     		return true;
     	} else {
     		System.out.println("The password is incorrect");
@@ -116,8 +111,8 @@ public class MainApp extends Application {
     	//register a new customer
         public static boolean registerCustomer(String username, String password) {
         	//check if username already exists
-        if (!clients.containsKey(username)) {
-        	clients.put(username, new User(username, password));
+        if (!customers.containsKey(username)) {
+        	customers.put(username, new User(username, password, false));
         	System.out.println("Creating an account successful");
         	logIn(username, password);
         	return true;
@@ -127,30 +122,50 @@ public class MainApp extends Application {
         }
     }
         
-        public static void customerLogOut() {
-        	userThread.logOut();
+        //------- FXML COMPONENTS ----------- //
+        
+        //Ruutu00 components
+        @FXML
+        private TextField userId;
+        
+        @FXML
+        private PasswordField password;
+        
+        @FXML
+        private Button loginButton;
+        
+        @FXML
+    	public void customerLogin(ActionEvent event) throws IOException {
+        	
+        	//for the sake of testing, if username and password fields are empty, login is still succesful
+        	if ((userId.getText().equals("") && password.getText().equals("")) || (customers.get(userId.getText()).getPassword().equals(password.getText()))) {
+	    		
+        		System.out.println("Login succesful");
+	    		changeScene(event, "UserView00.fxml");
+	    		
+        	} else {
+        		System.out.println("Incorrect password");
+        	}
+    	}
+        
+        //UserView00
+        
+        @FXML
+        private Button reserveNewTicket;
+    	
+        @FXML
+        public void reserveTicket(ActionEvent event) throws IOException {
+        	/** 
+        	 * this method starts a Thread that is used to retrieve and change the information
+        	 * about the system's trains.
+        	 */
+        	
+        	//change the scene to the first page of reserving a new ticket
+        	changeScene(event, "SearchTrip.fxml");
         }
         
-     // --------- FXML METHODS - CONTROLLER CLASS ---------
     	
     	
-    	//naming convention: changeTo[wanted scene name], for example: changeToLogin
-    	
-    	public void changeToUserView(ActionEvent event) throws IOException {
-    		
-    		//the next line tests binding methods to a button
-    		registerCustomer("Roosa", "akuankka");
-    		
-    		changeScene(event, "view/UserView00.fxml");
-    	}
-    	
-    	public void changeToLogin(ActionEvent event) throws IOException {
-    		
-    		//the next line tests binding a method to a button
-    		customerLogOut();
-    		changeScene(event, "view/Ruutu00.fxml");
-    		
-    	}
     	
     	
     	// A general code for changing the scene in the window. Parameters are the ActionEvent (button click) and the
@@ -171,6 +186,12 @@ public class MainApp extends Application {
     	
     public static void main(String[] args) {
         
+    	//creating test users
+    	User roosa = new User("Roosa", "akuankka", false);
+    	customers.put(roosa.getUserId(), roosa);
+    	
+    	//create test trains
+    	
     	//launch the application window 
         launch(args);
         

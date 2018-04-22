@@ -1,8 +1,9 @@
 package varaus.model;
 
 	import java.time.LocalDate;
+import java.util.ArrayList;
 
-	import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.IntegerProperty;
 	import javafx.beans.property.ObjectProperty;
 	import javafx.beans.property.SimpleIntegerProperty;
 	import javafx.beans.property.SimpleObjectProperty;
@@ -29,6 +30,7 @@ import varaus.MainApp;
 	    private String password; 
 	    private boolean admin; // ylläpitäjä vai ei
 	    private boolean loggedIn; //onko käyttäjä kirjautunut vai ei
+	    private ArrayList<Ticket> tickets;
 	    
 
 	    /**
@@ -61,10 +63,11 @@ import varaus.MainApp;
 	     * @param userId
 	     * @param password
 	     */
-	    public User(String userId, String password){
+	    public User(String userId, String password, boolean admin){
 	        this.userId = userId;
 	        this.password = password;
 	        this.admin = false;
+	        this.tickets = new ArrayList<Ticket>();
 	        
 	        
 	    }
