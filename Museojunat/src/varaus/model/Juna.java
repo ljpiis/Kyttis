@@ -4,7 +4,7 @@ package varaus.model;
 
 /**
  * Model class for a train.
- *
+ * 
  */
 public class Juna {
 
