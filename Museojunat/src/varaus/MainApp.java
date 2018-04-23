@@ -149,13 +149,13 @@ public class MainApp extends Application {
         	}
     	}
         
-        //00UserView
+        //00UserView, aktiiviset varaukset -listaus
         
         @FXML
-        private Button reserveNewTicket;
+        private Button toReserveNewTicket;
     	
         @FXML
-        public void reserveTicket(ActionEvent event) throws IOException {
+        public void toReserveTicket(ActionEvent event) throws IOException {
         	/** 
         	 * this method starts a Thread that is used to retrieve and change the information
         	 * about the system's trains.
@@ -166,9 +166,66 @@ public class MainApp extends Application {
         }
         
     	
+    	//01SearchTrip
+        @FXML
+        private Button to02ChooseTrip;
     	
+        @FXML
+        public void toChooseTrip(ActionEvent event) throws IOException {
+        	/** 
+        	 * this method starts a Thread that is used to ...
+        	 */
+        	
+        	//change the scene to the second page of reserving a new ticket
+        	changeScene(event, "02ChooseTrip.fxml");
+        }
+        
+        @FXML
+        private Button to00UserView;
     	
+        @FXML
+        public void toUserView(ActionEvent event) throws IOException {
+        	/** 
+        	 * Back to the previous page, to the UserView
+        	 */
+        	
+        	//change the scene to the second page of reserving a new ticket
+        	changeScene(event, "00UserView.fxml");
+        }
+        
     	
+        //02ChooseTrip
+        @FXML
+        private Button to03ChooseSeats;
+    	
+        @FXML
+        public void toChooseSeats(ActionEvent event) throws IOException {
+        	/** 
+        	 * this method starts a Thread that is used to retrieve and change the information
+        	 * about the seats (and car) on the chosen train.
+        	 */
+        	
+        	//change the scene to the second page of reserving a new ticket
+        	changeScene(event, "03ChooseSeats.fxml");
+        }
+        
+      //03ChooseSeats
+        @FXML
+        private Button to04UserPayment;
+    	
+        @FXML
+        public void toUserPayment(ActionEvent event) throws IOException {
+        	/** 
+        	 * this method starts a Thread that is used to retrieve and change the information
+        	 * about the seats (and car) on the chosen train.
+        	 */
+        	
+        	//change the scene to the second page of reserving a new ticket
+        	changeScene(event, "04UserPayment.fxml");
+        }
+        
+        
+        
     	// A general code for changing the scene in the window. Parameters are the ActionEvent (button click) and the
     	//name of the scene that you want to display.
     	public void changeScene(ActionEvent event, String sceneName) throws IOException {

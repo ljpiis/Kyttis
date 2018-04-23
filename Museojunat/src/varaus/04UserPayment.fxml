@@ -15,7 +15,7 @@
                </font>
             </Text>
             <Button layoutX="194.0" layoutY="251.0" mnemonicParsing="false" text="Seuraava" />
-            <Button layoutX="104.0" layoutY="251.0" mnemonicParsing="false" text="Edellinen" />
+            <Button fx:id="to03ChooseSeats" layoutX="104.0" layoutY="251.0" mnemonicParsing="false" onAction="#toChooseSeats" text="Edellinen" />
          </children>
       </AnchorPane>
    </children>

@@ -14,8 +14,8 @@
                   <Font name="DejaVu Sans ExtraLight" size="48.0" />
                </font>
             </Text>
-            <Button layoutX="194.0" layoutY="251.0" mnemonicParsing="false" text="Seuraava" />
-            <Button layoutX="104.0" layoutY="251.0" mnemonicParsing="false" text="Edellinen" />
+            <Button fx:id="to04UserPayment" layoutX="194.0" layoutY="251.0" mnemonicParsing="false" onAction="#toUserPayment" text="Seuraava" />
+            <Button fx:id="to02ChooseTrip" layoutX="104.0" layoutY="251.0" mnemonicParsing="false" onAction="#toChooseTrip" text="Edellinen" />
          </children>
       </AnchorPane>
    </children>
