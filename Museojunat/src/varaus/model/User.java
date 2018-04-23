@@ -20,12 +20,7 @@ import varaus.MainApp;
 	public class User {
 
 	    private String firstName;
-	    private String lastName;
-	    private String street;
-	    private String postalCode;
-	    private String city;
-	    private String birthday;
-	    
+	    private String lastName;	    
 	    private String userId;
 	    private String password; 
 	    private boolean admin; // ylläpitäjä vai ei
@@ -41,14 +36,10 @@ import varaus.MainApp;
 	        this.password = "";
 	    }
 	    
-	    public User(String firstName, String lastName, String street,String postalCode, String city, String birthday, String userId, String password, boolean admin) {
+	    public User(String firstName, String lastName, String userId, String password, boolean admin) {
 	    	
 	    	this.firstName = firstName;
 	    	this.lastName = lastName;
-	    	this.street = street;
-	    	this.postalCode = postalCode;
-	    	this.city = city;
-	    	this.birthday = birthday;
 	    	this.userId = userId;
 	    	this.password = password;
 	    	this.admin = admin;
@@ -107,38 +98,6 @@ import varaus.MainApp;
 
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
-		}
-
-		public String getStreet() {
-			return street;
-		}
-
-		public void setStreet(String street) {
-			this.street = street;
-		}
-
-		public String getPostalCode() {
-			return postalCode;
-		}
-
-		public void setPostalCode(String postalCode) {
-			this.postalCode = postalCode;
-		}
-
-		public String getCity() {
-			return city;
-		}
-
-		public void setCity(String city) {
-			this.city = city;
-		}
-
-		public String getBirthday() {
-			return birthday;
-		}
-
-		public void setBirthday(String birthday) {
-			this.birthday = birthday;
 		}
 
 		public String getUserId() {
