@@ -25,16 +25,17 @@ import varaus.model.UserThread;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private Scene scene1, scene2;
+    private Scene scene1; 
+    //scene2;
     
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("VarausApp");
+        this.primaryStage.setTitle("Museojunien VarausApp");
 
         initRootLayout();
-        showRuutu00();
+        show000Ruutu();
     }
 
     /**
@@ -61,17 +62,17 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the Ruutu00 inside the root layout.
+     * Shows the 000Ruutu inside the root layout.
      */
-    public void showRuutu00() {
+    public void show000Ruutu() {
         try {
-            // Load ruutu00.
+            // Load 000ruutu.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("Ruutu00.fxml"));
-            AnchorPane ruutu00 = (AnchorPane) loader.load();
+            loader.setLocation(MainApp.class.getResource("000Ruutu.fxml"));
+            AnchorPane alkuruutu = (AnchorPane) loader.load();
 
-            // Set ruutu00 into the center of root layout.
-            rootLayout.setCenter(ruutu00);
+            // Set 000ruutu into the center of root layout.
+            rootLayout.setCenter(alkuruutu);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,7 +125,7 @@ public class MainApp extends Application {
         
         //------- FXML COMPONENTS ----------- //
         
-        //Ruutu00 components
+        //000Ruutu components
         @FXML
         private TextField userId;
         
@@ -141,14 +142,14 @@ public class MainApp extends Application {
         	if ((userId.getText().equals("") && password.getText().equals("")) || (customers.get(userId.getText()).getPassword().equals(password.getText()))) {
 	    		
         		System.out.println("Login succesful");
-	    		changeScene(event, "UserView00.fxml");
+	    		changeScene(event, "00UserView.fxml");
 	    		
         	} else {
         		System.out.println("Incorrect password");
         	}
     	}
         
-        //UserView00
+        //00UserView
         
         @FXML
         private Button reserveNewTicket;
@@ -161,7 +162,7 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the first page of reserving a new ticket
-        	changeScene(event, "SearchTrip.fxml");
+        	changeScene(event, "01SearchTrip.fxml");
         }
         
     	
