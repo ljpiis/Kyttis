@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="varaus.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="varaus.MainApp">
    <children>
       <AnchorPane layoutX="-23.0" layoutY="-40.0" prefHeight="304.0" prefWidth="600.0">
          <children>
@@ -13,7 +13,7 @@
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Button layoutX="64.0" layoutY="225.0" mnemonicParsing="false" onAction="#changeToLogin" text="Varaa uusi lippu" />
+            <Button fx:id="reserveNewTicket" layoutX="64.0" layoutY="225.0" mnemonicParsing="false" onAction="#reserveTicket" text="Varaa uusi lippu" />
          </children>
       </AnchorPane>
    </children>

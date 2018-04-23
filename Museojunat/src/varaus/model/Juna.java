@@ -12,6 +12,7 @@ public class Juna {
     private String tyyppi;  // Voisi luoda class Tyyppi, joka ois höyry- tai diesel
     private boolean[] paikat; // tai boolean-taulukoista koostuva array -- vaunut
                                     // asetettais jokaiseen junaan tasan kolme vaunua?
+    //eli jokaisessa vaunussa 20 paikkaa? -RK
 
     /**
      * Default constructor.
