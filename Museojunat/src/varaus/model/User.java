@@ -25,7 +25,7 @@ import varaus.MainApp;
 	    private String password; 
 	    private boolean admin; // ylläpitäjä vai ei
 	    private boolean loggedIn; //onko käyttäjä kirjautunut vai ei
-	    private ArrayList<Ticket> tickets;
+	    private ArrayList<Ticket> tickets = new ArrayList<Ticket>(3); 
 	    
 
 	    /**
@@ -49,29 +49,19 @@ import varaus.MainApp;
 	    /**
 	     * Konstruktori, jossa meille aluksi oleelliset
 	     * Luo tavallisen käyttäjän
-	     * ei vielä osaa tarkistaa, onko tunnus jo käytössä
-	     * salasana2 lisäksi, niin voisi varmistaa et salasana tulee kaksi kertaa..?
+	     * ei vielä osaa tarkistaa, onko tunnus jo käytössä -- toiminnallisuus main-methodissa
+	     * 
 	     * @param userId
 	     * @param password
 	     */
 	    public User(String userId, String password, boolean admin){
 	        this.userId = userId;
 	        this.password = password;
-	        this.admin = false;
+	        this.admin = admin;
 	        this.tickets = new ArrayList<Ticket>();
-	        
-	        
+	           
 	    }
-	    
-	    
-	    /**
-	     * Constructor with some initial data.
-	     * 
-	     * @param firstName
-	     * @param lastName
-	     */
-	    public User(String firstName, String lastName, String tunnus) {
-	    }
+	
 	    
 	    
 	    //METHODS
@@ -131,6 +121,20 @@ import varaus.MainApp;
 		public void setLoggedIn(boolean loggedIn) {
 			this.loggedIn = loggedIn;
 		}
+		
+		
+		
+		/* After a ticket is bought, it should be added to the list of Tickets
+		* ..from which it is retrieved to the 00UserView -view
+		* Olisiko syytä lisätä jokin ehtolause; asetetaanko yläraja lipuille?
+		*/
+		
+		public void addTicket(Ticket t) {
+			tickets.add(t);
+		}
+	
+		
+		
 	}
 	    
 	    

@@ -11,7 +11,7 @@
    <children>
       <PasswordField fx:id="password" layoutX="93.0" layoutY="174.0" promptText="Salasana" />
       <TextField fx:id="userId" layoutX="93.0" layoutY="141.0" promptText="Tunnus" />
-      <Button fx:id="loginButton" layoutX="93.0" layoutY="223.0" mnemonicParsing="false" onAction="#customerLogin" prefHeight="41.0" prefWidth="149.0" text="Kirjaudu" textFill="#0ea17d">
+      <Button fx:id="loginButton" layoutX="93.0" layoutY="223.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="41.0" prefWidth="149.0" text="Kirjaudu" textFill="#0ea17d">
          <font>
             <Font name="DejaVu Sans Mono Bold" size="17.0" />
          </font>

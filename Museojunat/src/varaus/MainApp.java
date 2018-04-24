@@ -88,7 +88,7 @@ public class MainApp extends Application {
     
     //*** OBJECTS USED IN THE PROGRAMME ***
     
-    static HashMap<String, User> customers = new HashMap<String, User>();
+    static HashMap<String, User> userlist = new HashMap<String, User>();
     static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
     static UserThread userThread;
     
@@ -99,8 +99,8 @@ public class MainApp extends Application {
     public static boolean logIn(String username, String password) {
     	
     	//check if the password is correct
-    	if (customers.get(username).getPassword().equals(password)) {
-    		System.out.println("Login successful");
+    	if (userlist.get(username).getPassword().equals(password)) {
+    		System.out.println("Password is correct");
     		return true;
     	} else {
     		System.out.println("The password is incorrect");
@@ -112,8 +112,8 @@ public class MainApp extends Application {
     	//register a new customer
         public static boolean registerCustomer(String username, String password) {
         	//check if username already exists
-        if (!customers.containsKey(username)) {
-        	customers.put(username, new User(username, password, false));
+        if (!userlist.containsKey(username)) {
+        	userlist.put(username, new User(username, password, false));
         	System.out.println("Creating an account successful");
         	logIn(username, password);
         	return true;
@@ -128,32 +128,36 @@ public class MainApp extends Application {
         //000Ruutu components
         @FXML
         private TextField userId;
-        
         @FXML
         private PasswordField password;
-        
         @FXML
-        private Button loginButton;
-        
+        private Button loginButton; 
         @FXML
-    	public void customerLogin(ActionEvent event) throws IOException {
+    	public void userLogin(ActionEvent event) throws IOException {
         	
         	//for the sake of testing, if username and password fields are empty, login is still succesful
-        	if ((userId.getText().equals("") && password.getText().equals("")) || (customers.get(userId.getText()).getPassword().equals(password.getText()))) {
+        	// tulisi sisältää toiminnallisuus sen suhteen, mitä tehdään kun käyttäjätunnusta ei löydy ja
+        	// tarvitsee luoda uusi (perus)käyttäjä -- adminit on luotuna valmiina
+        	if ( (userId.getText().equals("") && password.getText().equals("")) || (userlist.get(userId.getText()).getPassword().equals(password.getText())) && !(userlist.get(userId.getText()).isAdmin()) ) {
 	    		
         		System.out.println("Login succesful");
 	    		changeScene(event, "00UserView.fxml");
 	    		
-        	} else {
+        	} 
+        	else if((userlist.get(userId.getText()).getPassword().equals(password.getText())) && ( userlist.get(userId.getText()).isAdmin() )){
+        		System.out.println("AdminLogin succesful");
+	    		changeScene(event, "100AdminView.fxml");
+        	}
+        	else {
         		System.out.println("Incorrect password");
         	}
     	}
+        
         
         //00UserView, aktiiviset varaukset -listaus
         
         @FXML
         private Button toReserveNewTicket;
-    	
         @FXML
         public void toReserveTicket(ActionEvent event) throws IOException {
         	/** 
@@ -164,12 +168,17 @@ public class MainApp extends Application {
         	//change the scene to the first page of reserving a new ticket
         	changeScene(event, "01SearchTrip.fxml");
         }
+    	@FXML
+        private Button to000Ruutu;
+        @FXML
+        public void toRuutu(ActionEvent event) throws IOException {
+        	changeScene(event, "000Ruutu.fxml");
+        }
         
     	
     	//01SearchTrip
         @FXML
         private Button to02ChooseTrip;
-    	
         @FXML
         public void toChooseTrip(ActionEvent event) throws IOException {
         	/** 
@@ -182,7 +191,6 @@ public class MainApp extends Application {
         
         @FXML
         private Button to00UserView;
-    	
         @FXML
         public void toUserView(ActionEvent event) throws IOException {
         	/** 
@@ -197,7 +205,6 @@ public class MainApp extends Application {
         //02ChooseTrip
         @FXML
         private Button to03ChooseSeats;
-    	
         @FXML
         public void toChooseSeats(ActionEvent event) throws IOException {
         	/** 
@@ -212,7 +219,6 @@ public class MainApp extends Application {
       //03ChooseSeats
         @FXML
         private Button to04UserPayment;
-    	
         @FXML
         public void toUserPayment(ActionEvent event) throws IOException {
         	/** 
@@ -240,14 +246,57 @@ public class MainApp extends Application {
     		
     	}
 
+    	// Admin -- moving between views 
+    	@FXML
+        private Button to100AdminView;
+        @FXML
+        public void toAdminView(ActionEvent event) throws IOException {
+        	changeScene(event, "100AdminView.fxml");
+        }
+    	@FXML
+        private Button to110SearchUser;
+        @FXML
+        public void toSearchUser(ActionEvent event) throws IOException {
+        	changeScene(event, "110SearchUser.fxml");
+        }
+    	@FXML
+        private Button to120TrainView;
+        @FXML
+        public void toTrainView(ActionEvent event) throws IOException {
+        	changeScene(event, "120TrainView.fxml");
+        }
+    	@FXML
+        private Button to130RouteView;
+        @FXML
+        public void toRouteView(ActionEvent event) throws IOException {
+        	changeScene(event, "130RouteView.fxml");
+        }
+        @FXML
+        private Button to140TripView;
+        @FXML
+        public void toTripView(ActionEvent event) throws IOException {
+        	changeScene(event, "140TripView.fxml");
+        }
+
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	//*** MAIN METHOD *****
     	
     public static void main(String[] args) {
         
     	//creating test users
     	User roosa = new User("Roosa", "akuankka", false);
-    	customers.put(roosa.getUserId(), roosa);
-    	
+    	userlist.put(roosa.getUserId(), roosa);
+    	// creating a test admin (the userlist-hashmap might now be a bit missleading with the naming, but the admins
+    	// should be found from the same location) 
+    	User admini = new User("admini", "aku", true);
+    	userlist.put(admini.getUserId(), admini);
+    	System.out.println("Created test-admin " + admini.getUserId());
     	//create test trains
     	
     	//launch the application window 
