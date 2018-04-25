@@ -23,6 +23,13 @@ import varaus.model.User;
 import varaus.model.UserThread;
 
 public class MainApp extends Application {
+	
+
+	
+	
+	
+	
+	
     private Stage primaryStage;
     private BorderPane rootLayout;
     private Scene scene1; 
@@ -289,20 +296,32 @@ public class MainApp extends Application {
     	
     public static void main(String[] args) {
         
+    	
+    	//-----------
     	//creating test users
     	User roosa = new User("Roosa", "akuankka", false);
     	userlist.put(roosa.getUserId(), roosa);
-    	// creating a test admin (the userlist-hashmap might now be a bit missleading with the naming, but the admins
-    	// should be found from the same location) 
+    	// creating a test admin 
     	User admini = new User("admini", "aku", true);
     	userlist.put(admini.getUserId(), admini);
-    	System.out.println("Created test-admin " + admini.getUserId());
+    	System.out.println("Created test-users " + admini.getUserId());
+    	
+    	
+    	
+    	//--------------
+    	
+    	
     	//create test trains
     	
     	//launch the application window 
         launch(args);
-        
-        
-        
+
     }
+    
+    public HashMap<String, User> getUserList(){
+		return userlist;
+	}
+    
+    
+    
 }
