@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="429.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="varaus.MainApp">
+<AnchorPane prefHeight="429.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="varaus.Controller110SearchUser">
    <children>
       <Text layoutX="36.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Käyttäjien hallinta" wrappingWidth="653.046875">
          <font>
@@ -25,10 +25,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutX="-10.0" layoutY="17.0" prefHeight="200.0" prefWidth="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="userTable" layoutX="-10.0" layoutY="17.0" prefHeight="200.0" prefWidth="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="70.0" text="Tunnus" />
-                      <TableColumn prefWidth="108.0" text="Nimi" />
+                      <TableColumn fx:id="userIdColumn" prefWidth="70.0" text="Tunnus" />
+                      <TableColumn fx:id="nameColumn" prefWidth="108.0" text="Nimi" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -59,10 +59,10 @@
                         <Label text="Nimi" GridPane.rowIndex="1" />
                         <Label text="Admin-oikeus?" GridPane.rowIndex="2" />
                         <Label text="Salasana" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="userIdLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="nameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="adminLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="passwordLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="136.0" layoutY="169.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

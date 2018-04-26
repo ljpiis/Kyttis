@@ -1,13 +1,12 @@
-// TESTIMUUTOS 2
-
 package varaus;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,20 +22,63 @@ import varaus.model.User;
 import varaus.model.UserThread;
 
 public class MainApp extends Application {
-	
-
-	
-	
-	
-	
-	
     private Stage primaryStage;
     private BorderPane rootLayout;
     private Scene scene1; 
     //scene2;
+    //*** OBJECTS USED IN THE PROGRAMME ***
     
+    static HashMap<String, User> userlist = new HashMap<String, User>(); // Kirjautuminen nojaa t‰h‰n, tupla
+    private ObservableList<User> userData = FXCollections.observableArrayList(); // Listaus nojaa t‰h‰n
+    static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
+    static UserThread userThread;
+    
+    /**
+     * Constructor
+     */
+    public MainApp() {
+        
+    	
+    	//-----------
+    	//creating test users
+    	User roosa = new User("Roosa", "akuankka", false);
+    	userData.add(roosa);
+    	userlist.put(roosa.getUserId(), roosa); //tupla
+    	
+    	// creating a test admin 
+    	User admini = new User("admini", "aku", true);
+    	userData.add(admini);
+    	userlist.put(admini.getUserId(), admini); // tupla
+    	
+    	userData.add(new User("admin", "aku", true));
 
+    	System.out.println("Created test-users " + userData);
+    	
+    	//--------------
+    	
+    	
+    	//create test trains
+    	
+
+    }
+    
+    /**
+     * Returns the data as an observable list of Users
+     * @return
+     */
+    public ObservableList<User> getUserData(){
+		return userData;
+	}
+    
     @Override
+    /* The most important method, as it is automatically called when the application
+     * is launched from within the main -method.
+     * Receives a Stage as parameter. This is the main container in which 
+     * we can then add a Scene, which then again can be switched out 
+     * by another Scene. 
+     * (non-Javadoc)
+     * @see javafx.application.Application#start(javafx.stage.Stage)
+     */
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Museojunien VarausApp");
@@ -80,6 +122,13 @@ public class MainApp extends Application {
 
             // Set 000ruutu into the center of root layout.
             rootLayout.setCenter(alkuruutu);
+            
+         // Give the controller access to the main app.
+            // Heitt‰‰ virhett‰ t‰st‰:
+           // Controller110SearchUser controller = loader.getController();
+           // controller.setMainApp(this);
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,14 +142,9 @@ public class MainApp extends Application {
         return primaryStage;
     }
     
-    //*** OBJECTS USED IN THE PROGRAMME ***
-    
-    static HashMap<String, User> userlist = new HashMap<String, User>();
-    static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
-    static UserThread userThread;
     
         
-        //****METHODS FOR HANDLING USER REGISTRATION AND LOGGING IN ****
+    //****METHODS FOR HANDLING USER REGISTRATION AND LOGGING IN ****
     
     //login
     public static boolean logIn(String username, String password) {
@@ -295,32 +339,12 @@ public class MainApp extends Application {
     	//*** MAIN METHOD *****
     	
     public static void main(String[] args) {
-        
-    	
-    	//-----------
-    	//creating test users
-    	User roosa = new User("Roosa", "akuankka", false);
-    	userlist.put(roosa.getUserId(), roosa);
-    	// creating a test admin 
-    	User admini = new User("admini", "aku", true);
-    	userlist.put(admini.getUserId(), admini);
-    	System.out.println("Created test-users " + admini.getUserId());
-    	
-    	
-    	
-    	//--------------
-    	
-    	
-    	//create test trains
-    	
     	//launch the application window 
-        launch(args);
-
+    	launch(args);
     }
     
-    public HashMap<String, User> getUserList(){
-		return userlist;
-	}
+
+    
     
     
     

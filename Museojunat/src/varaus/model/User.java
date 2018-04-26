@@ -1,15 +1,14 @@
 package varaus.model;
 
 	import java.time.LocalDate;
-import java.util.ArrayList;
-
-import javafx.beans.property.IntegerProperty;
+	import java.util.ArrayList;
+	import javafx.beans.property.IntegerProperty;
 	import javafx.beans.property.ObjectProperty;
 	import javafx.beans.property.SimpleIntegerProperty;
 	import javafx.beans.property.SimpleObjectProperty;
 	import javafx.beans.property.SimpleStringProperty;
 	import javafx.beans.property.StringProperty;
-import varaus.MainApp;
+	import varaus.MainApp;
 
 	/**
 	 * Model class for a User.
@@ -19,10 +18,10 @@ import varaus.MainApp;
 	 */
 	public class User {
 
-	    private String firstName;
-	    private String lastName;	    
-	    private String userId;
-	    private String password; 
+	    private StringProperty firstName;
+	    private StringProperty lastName;	    
+	    private StringProperty userId;
+	    private StringProperty password; 
 	    private boolean admin; // ylläpitäjä vai ei
 	    private boolean loggedIn; //onko käyttäjä kirjautunut vai ei
 	    private ArrayList<Ticket> tickets = new ArrayList<Ticket>(3); 
@@ -32,18 +31,18 @@ import varaus.MainApp;
 	     * Default constructor.
 	     */
 	    public User() {
-	        this.userId = "";
-	        this.password = "";
+	        this.userId = null;
+	        this.password = null;
 	    }
 	    
 	    public User(String firstName, String lastName, String userId, String password, boolean admin) {
 	    	
-	    	this.firstName = firstName;
-	    	this.lastName = lastName;
-	    	this.userId = userId;
-	    	this.password = password;
+	    	this.firstName = new SimpleStringProperty(firstName);
+	    	this.lastName = new SimpleStringProperty(lastName);
+	    	this.userId = new SimpleStringProperty(userId);
+	    	this.password = new SimpleStringProperty(password);
 	    	this.admin = admin;
-	    	
+	    	// loggedIn ja tickets
 	    }
 
 	    /**
@@ -55,8 +54,8 @@ import varaus.MainApp;
 	     * @param password
 	     */
 	    public User(String userId, String password, boolean admin){
-	        this.userId = userId;
-	        this.password = password;
+	    	this.userId = new SimpleStringProperty(userId);
+	    	this.password = new SimpleStringProperty(password);
 	        this.admin = admin;
 	        this.tickets = new ArrayList<Ticket>();
 	           
@@ -75,45 +74,49 @@ import varaus.MainApp;
 	    //GETTERS AND SETTERS
 
 		public String getFirstName() {
+			return firstName.get();
+		}
+		public void setFirstName(String firstName) {
+			this.firstName.set(firstName);
+		}
+		public StringProperty firstNameProperty() {
 			return firstName;
 		}
-
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-
+		
+		
 		public String getLastName() {
-			return lastName;
+			return lastName.get();
 		}
-
 		public void setLastName(String lastName) {
-			this.lastName = lastName;
+			this.lastName.set(lastName);
 		}
+		public StringProperty lastNameProperty() {
+	        return lastName;
+	    }
 
 		public String getUserId() {
+			return userId.get();
+		}
+		public void setUserId(String userId) {
+			this.userId.set(userId);
+		}
+		public StringProperty userIdProperty() {
 			return userId;
 		}
 
-		public void setUserId(String userId) {
-			this.userId = userId;
-		}
-
 		public String getPassword() {
-			return password;
+			return password.get();
 		}
-
 		public void setPassword(String password) {
-			this.password = password;
+			this.password.set(password);
 		}
 
 		public boolean isAdmin() {
 			return admin;
 		}
-
 		public void setAdmin(boolean admin) {
 			this.admin = admin;
 		}
-
 		public boolean isLoggedIn() {
 			return loggedIn;
 		}
