@@ -10,7 +10,9 @@ public class Juna {
 
 	private String nimi;
     private String tyyppi;  // Voisi luoda class Tyyppi, joka ois höyry- tai diesel
-    private boolean[] paikat; // tai boolean-taulukoista koostuva array -- vaunut
+    private int vaunuja;
+    private int paikkojaVaunussa;   
+    private boolean[][] paikat; // tai boolean-taulukoista koostuva array -- vaunut
                                     // asetettais jokaiseen junaan tasan kolme vaunua?
     //eli jokaisessa vaunussa 20 paikkaa? -RK
 
@@ -18,11 +20,13 @@ public class Juna {
      * Default constructor.
      */
     public Juna() {
-        this(null, null);
-        this.paikat = new boolean[60];
-        for(int i=0 ; i<60; i++) {
-        	paikat[i]=false;
-        }
+        this(null, null, 3, 20);
+        this.paikat = new boolean[3][20];
+        for (int j=0; j<3; j++) {
+        	for(int i=0 ; i<20; i++) {
+            	paikat[j][i]=false;
+            }
+        }      
     }
 
     /**
@@ -31,15 +35,19 @@ public class Juna {
      * @param nimi
      * @param tyyppi joko h (niinkuin höyryjuna) tai d (niinkuin diisseli)
      */
-    public Juna(String nimi, String tyyppi) {
+    public Juna(String nimi, String tyyppi, int vaunuja, int paikkojaVaunussa) {
         this.nimi = nimi;
         setTyyppi(tyyppi);
+        this.vaunuja = vaunuja;
+        this.paikkojaVaunussa = paikkojaVaunussa;
+        this.paikat = new boolean[vaunuja][paikkojaVaunussa];
 
         // Alustetaan tyhjät vaunupaikat 
-        this.paikat = new boolean[60];
-        for(int i=0 ; i<60; i++) {
-        	paikat[i]=false;
-        }
+        for (int j=0; j<vaunuja; j++) {
+        	for(int i=0 ; i<paikkojaVaunussa; i++) {
+            	paikat[j][i]=false;
+            }
+        }      
     }
     
     //getterit ja setterit
@@ -64,12 +72,32 @@ public class Juna {
 		else {return false;}
 	}
 	
-	public boolean varaaPaikka(int paikka) {  //attribuutiksi vaunun numero..
-		if(paikat[paikka]) { // eli jos true, niin on varattu!
+	public int getVaunuja() {
+        return this.vaunuja;
+	    }
+
+    public void setVaunuja(int vaunuja) {
+        this.vaunuja = vaunuja;
+    }
+    
+    public int getPaikkojaVaunussa() {
+        return this.paikkojaVaunussa;
+	    }
+
+    public void setPaikkojaVaunussa(int paikkojaVaunussa) {
+        this.paikkojaVaunussa = paikkojaVaunussa;
+    }
+	
+	public boolean varaaPaikka(int vaunu, int paikka) { 
+		if (vaunu < 1 || vaunu > this.vaunuja || paikka < 1 || paikka > this.paikkojaVaunussa) {
+			System.out.println("Junassa ei ole paikkaa numero" + paikka + "vaunussa" + vaunu + ".");
 			return false;
 		}
+		if(paikat[vaunu][paikka]) { // eli jos true, niin on varattu!
+				return false;
+			}
 		else {               // muutoin siis varataan paikka
-			paikat[paikka]=true;
+			paikat[vaunu][paikka]=true;
 			return true;
 		}
 	}
