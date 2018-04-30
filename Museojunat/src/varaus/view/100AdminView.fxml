@@ -7,12 +7,12 @@
 
 <AnchorPane prefHeight="429.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="varaus.MainApp">
    <children>
-      <Text layoutX="41.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administraatiovälineistö" wrappingWidth="653.046875">
+      <Text layoutX="41.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administraatiovalineisto" wrappingWidth="653.046875">
          <font>
             <Font name="DejaVu Sans ExtraLight" size="48.0" />
          </font>
       </Text>
-      <Button fx:id="to110SearchUser" layoutX="126.0" layoutY="132.0" mnemonicParsing="false" onAction="#toSearchUser" prefHeight="83.0" prefWidth="184.0" text="Käyttäjät">
+      <Button fx:id="to110SearchUser" layoutX="126.0" layoutY="132.0" mnemonicParsing="false" onAction="#toSearchUser" prefHeight="83.0" prefWidth="184.0" text="Kayttajat">
          <font>
             <Font size="29.0" />
          </font></Button>

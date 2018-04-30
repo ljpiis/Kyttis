@@ -17,21 +17,25 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import varaus.model.Asema;
 import varaus.model.Juna;
 import varaus.model.User;
 import varaus.model.UserThread;
+import varaus.view.Controller110SearchUser;
 
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private Scene scene1; 
+    private Scene scene1;
     //scene2;
     //*** OBJECTS USED IN THE PROGRAMME ***
     
-    static HashMap<String, User> userlist = new HashMap<String, User>(); // Kirjautuminen nojaa t‰h‰n, tupla
-    private ObservableList<User> userData = FXCollections.observableArrayList(); // Listaus nojaa t‰h‰n
+    static HashMap<String, User> userlist = new HashMap<String, User>(); // Kirjautuminen nojaa tahan, tupla
+    private ObservableList<User> userData = FXCollections.observableArrayList(); // Listaus nojaa tahan
     static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
     static UserThread userThread;
+    
+    
     
     /**
      * Constructor
@@ -57,7 +61,7 @@ public class MainApp extends Application {
     	//--------------
     	
     	
-    	//create test trains
+    	//create test trains	
     	
 
     }
@@ -124,9 +128,9 @@ public class MainApp extends Application {
             rootLayout.setCenter(alkuruutu);
             
          // Give the controller access to the main app.
-            // Heitt‰‰ virhett‰ t‰st‰:
-           // Controller110SearchUser controller = loader.getController();
-           // controller.setMainApp(this);
+            // Heittaa virhetta tasta:
+            //Controller110SearchUser controller = loader.getController();
+            //controller.setMainApp(this);
             
             
         } catch (IOException e) {
@@ -187,8 +191,8 @@ public class MainApp extends Application {
     	public void userLogin(ActionEvent event) throws IOException {
         	
         	//for the sake of testing, if username and password fields are empty, login is still succesful
-        	// tulisi sis‰lt‰‰ toiminnallisuus sen suhteen, mit‰ tehd‰‰n kun k‰ytt‰j‰tunnusta ei lˆydy ja
-        	// tarvitsee luoda uusi (perus)k‰ytt‰j‰ -- adminit on luotuna valmiina
+        	// tulisi sisaltaa toiminnallisuus sen suhteen, mita tehdaan kun kayttajatunnusta ei loydy ja
+        	// tarvitsee luoda uusi (perus)kayttaja -- adminit on luotuna valmiina
         	if ( (userId.getText().equals("") && password.getText().equals("")) || (userlist.get(userId.getText()).getPassword().equals(password.getText())) && !(userlist.get(userId.getText()).isAdmin()) ) {
 	    		
         		System.out.println("Login succesful");
@@ -329,23 +333,51 @@ public class MainApp extends Application {
         	changeScene(event, "140TripView.fxml");
         }
 
-    	
-    	
-    	
-    	
-    	
-    	
+    	  	
     	
     	//*** MAIN METHOD *****
     	
     public static void main(String[] args) {
+    	
+    	// EI Oli alunperin MainAppin konstruktorissa testUserien 
+    	// "Tietokanta"
+    	Juna[] junat = new Juna[4];
+    	Asema[] asemat = new Asema[8];
+    	
+    	//Luodaan asemi
+    	
+    	// Asemat
+    	asemat[0] = new Asema("Asema 1");
+    	asemat[1] = new Asema("Asema 2");
+    	asemat[2] = new Asema("Asema 3");
+    	asemat[3] = new Asema("Asema 4");
+    	asemat[4] = new Asema("Asema 5");
+    	asemat[5] = new Asema("Asema 6");
+    	asemat[6] = new Asema("Asema 7");
+    	asemat[7] = new Asema("Asema 8");
+    	
+    	// Yhteydet
+    	asemat[0].lisaaYhteys(asemat[1], 15);
+    	asemat[1].lisaaYhteys(asemat[2], 18);
+    	asemat[2].lisaaYhteys(asemat[3], 10);
+    	asemat[0].lisaaYhteys(asemat[4], 21);
+    	asemat[4].lisaaYhteys(asemat[5], 13);
+    	asemat[0].lisaaYhteys(asemat[6], 7);
+    	asemat[6].lisaaYhteys(asemat[7], 19);
+       
+       	//Reitit
+       	for (Asema tarkasteltava : asemat) {
+       		tarkasteltava.luoReitit(tarkasteltava);	
+       	}
+       	
+       	// Junat
+    	junat[0] = new Juna("Juna 1", "h", 3, 20);
+    	junat[1] = new Juna("Juna 2", "h", 4, 20);
+    	junat[2] = new Juna("Juna 3", "h", 5, 20);
+    	junat[3] = new Juna();
+    	
     	//launch the application window 
-    	launch(args);
-    }
-    
-
-    
-    
-    
-    
-}
+    	launch(args);   	
+    	 	
+    } //main      
+} //MainApp

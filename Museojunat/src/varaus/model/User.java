@@ -22,8 +22,8 @@ package varaus.model;
 	    private StringProperty lastName;	    
 	    private StringProperty userId;
 	    private StringProperty password; 
-	    private boolean admin; // ylläpitäjä vai ei
-	    private boolean loggedIn; //onko käyttäjä kirjautunut vai ei
+	    private boolean admin; // yllapitaja vai ei
+	    private boolean loggedIn; //onko kayttaja kirjautunut vai ei
 	    private ArrayList<Ticket> tickets = new ArrayList<Ticket>(3); 
 	    
 
@@ -47,8 +47,8 @@ package varaus.model;
 
 	    /**
 	     * Konstruktori, jossa meille aluksi oleelliset
-	     * Luo tavallisen käyttäjän
-	     * ei vielä osaa tarkistaa, onko tunnus jo käytössä -- toiminnallisuus main-methodissa
+	     * Luo tavallisen kayttajan
+	     * ei viela osaa tarkistaa, onko tunnus jo kaytossa -- toiminnallisuus main-methodissa
 	     * 
 	     * @param userId
 	     * @param password
@@ -129,7 +129,7 @@ package varaus.model;
 		
 		/* After a ticket is bought, it should be added to the list of Tickets
 		* ..from which it is retrieved to the 00UserView -view
-		* Olisiko syytä lisätä jokin ehtolause; asetetaanko yläraja lipuille?
+		* Olisiko syyta lisata jokin ehtolause; asetetaanko ylaraja lipuille?
 		*/
 		
 		public void addTicket(Ticket t) {
