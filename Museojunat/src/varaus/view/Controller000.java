@@ -38,7 +38,7 @@ public class Controller000 {
         private Button to100AdminView;
         @FXML
         public void toAdminView(ActionEvent event) throws IOException {
-        	changeScene(event, "100AdminView.fxml");
+        	changeScene(event, "view/100AdminView.fxml");
         }
     	// A general code for changing the scene in the window. Parameters are the ActionEvent (button click) and the
     	//name of the scene that you want to display.

@@ -17,53 +17,36 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import varaus.model.Asema;
 import varaus.model.Juna;
 import varaus.model.User;
 import varaus.model.UserThread;
 import varaus.view.Controller110SearchUser;
 
+
+
+
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private Scene scene1;
+    //private Scene scene1;
     //scene2;
     //*** OBJECTS USED IN THE PROGRAMME ***
     
     static HashMap<String, User> userlist = new HashMap<String, User>(); // Kirjautuminen nojaa tahan, tupla
-    private ObservableList<User> userData = FXCollections.observableArrayList(); // Listaus nojaa tahan
+    private static ObservableList<User> userData = FXCollections.observableArrayList(); // Listaus nojaa tahan
     static HashMap<User, UserThread> clientThreads = new HashMap<User, UserThread>();
     static UserThread userThread;
-    
-    
     
     /**
      * Constructor
      */
     public MainApp() {
-        
-    	
-    	//-----------
-    	//creating test users
-    	User roosa = new User("Roosa", "akuankka", false);
-    	userData.add(roosa);
-    	userlist.put(roosa.getUserId(), roosa); //tupla
-    	
+    	userData.add(new User("Laasa", "aku", false));
     	// creating a test admin 
-    	User admini = new User("admini", "aku", true);
-    	userData.add(admini);
-    	userlist.put(admini.getUserId(), admini); // tupla
-    	
     	userData.add(new User("admin", "aku", true));
-
-    	System.out.println("Created test-users " + userData);
     	
-    	//--------------
-    	
-    	
-    	//create test trains	
-    	
-
     }
     
     /**
@@ -98,10 +81,11 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
+            Scene scene1; // tama ylhaalla
             scene1 = new Scene(rootLayout);
             primaryStage.setScene(scene1);
             primaryStage.show();
@@ -110,6 +94,7 @@ public class MainApp extends Application {
             //scene2 = new Scene(300, 300)
             
         } catch (IOException e) {
+        	System.out.println("Start-metodi");
             e.printStackTrace();
         }
     }
@@ -121,7 +106,7 @@ public class MainApp extends Application {
         try {
             // Load 000ruutu.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("000Ruutu.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/000Ruutu.fxml"));
             AnchorPane alkuruutu = (AnchorPane) loader.load();
 
             // Set 000ruutu into the center of root layout.
@@ -129,9 +114,8 @@ public class MainApp extends Application {
             
          // Give the controller access to the main app.
             // Heittaa virhetta tasta:
-            //Controller110SearchUser controller = loader.getController();
-            //controller.setMainApp(this);
-            
+           // Controller110SearchUser controller = loader.getController();
+           // controller.setMainApp(this);            
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -196,12 +180,12 @@ public class MainApp extends Application {
         	if ( (userId.getText().equals("") && password.getText().equals("")) || (userlist.get(userId.getText()).getPassword().equals(password.getText())) && !(userlist.get(userId.getText()).isAdmin()) ) {
 	    		
         		System.out.println("Login succesful");
-	    		changeScene(event, "00UserView.fxml");
+	    		changeScene(event, "view/00UserView.fxml");
 	    		
         	} 
         	else if((userlist.get(userId.getText()).getPassword().equals(password.getText())) && ( userlist.get(userId.getText()).isAdmin() )){
         		System.out.println("AdminLogin succesful");
-	    		changeScene(event, "100AdminView.fxml");
+	    		changeScene(event, "view/100AdminView.fxml");
         	}
         	else {
         		System.out.println("Incorrect password");
@@ -221,13 +205,13 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the first page of reserving a new ticket
-        	changeScene(event, "01SearchTrip.fxml");
+        	changeScene(event, "view/01SearchTrip.fxml");
         }
     	@FXML
         private Button to000Ruutu;
         @FXML
         public void toRuutu(ActionEvent event) throws IOException {
-        	changeScene(event, "000Ruutu.fxml");
+        	changeScene(event, "view/000Ruutu.fxml");
         }
         
     	
@@ -241,7 +225,7 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the second page of reserving a new ticket
-        	changeScene(event, "02ChooseTrip.fxml");
+        	changeScene(event, "view/02ChooseTrip.fxml");
         }
         
         @FXML
@@ -253,7 +237,7 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the second page of reserving a new ticket
-        	changeScene(event, "00UserView.fxml");
+        	changeScene(event, "view/00UserView.fxml");
         }
         
     	
@@ -268,7 +252,7 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the second page of reserving a new ticket
-        	changeScene(event, "03ChooseSeats.fxml");
+        	changeScene(event, "view/03ChooseSeats.fxml");
         }
         
       //03ChooseSeats
@@ -282,7 +266,7 @@ public class MainApp extends Application {
         	 */
         	
         	//change the scene to the second page of reserving a new ticket
-        	changeScene(event, "04UserPayment.fxml");
+        	changeScene(event, "view/04UserPayment.fxml");
         }
         
         
@@ -306,31 +290,31 @@ public class MainApp extends Application {
         private Button to100AdminView;
         @FXML
         public void toAdminView(ActionEvent event) throws IOException {
-        	changeScene(event, "100AdminView.fxml");
+        	changeScene(event, "view/100AdminView.fxml");
         }
     	@FXML
         private Button to110SearchUser;
         @FXML
         public void toSearchUser(ActionEvent event) throws IOException {
-        	changeScene(event, "110SearchUser.fxml");
+        	changeScene(event, "view/110SearchUser.fxml");
         }
     	@FXML
         private Button to120TrainView;
         @FXML
         public void toTrainView(ActionEvent event) throws IOException {
-        	changeScene(event, "120TrainView.fxml");
+        	changeScene(event, "view/120TrainView.fxml");
         }
     	@FXML
         private Button to130RouteView;
         @FXML
         public void toRouteView(ActionEvent event) throws IOException {
-        	changeScene(event, "130RouteView.fxml");
+        	changeScene(event, "view/130RouteView.fxml");
         }
         @FXML
         private Button to140TripView;
         @FXML
         public void toTripView(ActionEvent event) throws IOException {
-        	changeScene(event, "140TripView.fxml");
+        	changeScene(event, "view/140TripView.fxml");
         }
 
     	  	
@@ -338,6 +322,24 @@ public class MainApp extends Application {
     	//*** MAIN METHOD *****
     	
     public static void main(String[] args) {
+    	
+       	//-----------
+    	//creating test users
+    	User roosa = new User("Roosa", "akuankka", false);
+    	userData.add(roosa);
+    	userlist.put(roosa.getUserId(), roosa); //tupla
+    	
+    	// creating a test admin 
+    	User admini = new User("admini", "aku", true);
+    	userData.add(admini);
+    	userlist.put(admini.getUserId(), admini); // tupla
+    	
+    	userData.add(new User("admin", "aku", true));
+
+    	System.out.println("Created test-users " + userData);
+    	
+    	//--------------
+
     	
     	// EI Oli alunperin MainAppin konstruktorissa testUserien 
     	// "Tietokanta"

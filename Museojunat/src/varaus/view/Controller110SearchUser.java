@@ -19,7 +19,7 @@ import varaus.model.User;
 public class Controller110SearchUser {
 
 	
-	 @FXML
+	 	@FXML
 	    private TableView<User> userTable;
 	    @FXML
 	    private TableColumn<User, String> userIdColumn;
@@ -38,7 +38,7 @@ public class Controller110SearchUser {
         private Button to100AdminView;
         @FXML
         public void toAdminView(ActionEvent event) throws IOException {
-        	changeScene(event, "100AdminView.fxml");
+        	changeScene(event, "view/100AdminView.fxml");
         }
     	// A general code for changing the scene in the window. Parameters are the ActionEvent (button click) and the
     	//name of the scene that you want to display.
@@ -70,7 +70,10 @@ public class Controller110SearchUser {
 	     */
 	    @FXML
 	    private void initialize() {
+	    	// Called right after the fxml file has been loaded. 
+	    	// At this time all the fxml fields should have been initialized already.
 	        // Initialize the person table with the two columns.
+	    	// Using a Java 8 feature called Lambdas
 	        userIdColumn.setCellValueFactory(cellData -> cellData.getValue().userIdProperty());
 	        nameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
 	    }
@@ -80,10 +83,10 @@ public class Controller110SearchUser {
 	     * 
 	     * @param mainApp
 	     */
-	    public void setMainApp(MainApp mainApp) {
-	        this.mainApp = mainApp;
+	    public void setMainApp(MainApp mainAppi) {
+	        this.mainApp = mainAppi;
 	        // Add observable list data to the table
-	        userTable.setItems(mainApp.getUserData());
+	        userTable.setItems(mainAppi.getUserData());
 	    }
 	
 	
