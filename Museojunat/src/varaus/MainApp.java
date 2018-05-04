@@ -111,13 +111,10 @@ public class MainApp extends Application {
 
             // Set 000ruutu into the center of root layout.
             rootLayout.setCenter(alkuruutu);
-            
-         // Give the controller access to the main app.
-            // Heittaa virhetta tasta:
-           // Controller110SearchUser controller = loader.getController();
-           // controller.setMainApp(this);            
+          
             
         } catch (IOException e) {
+        	System.out.println("show000Ruutu");
             e.printStackTrace();
         }
     }
@@ -285,7 +282,7 @@ public class MainApp extends Application {
     		
     	}
 
-    	// Admin -- moving between views 
+    	// Admin -- moving between views ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     	@FXML
         private Button to100AdminView;
         @FXML
@@ -296,8 +293,38 @@ public class MainApp extends Application {
         private Button to110SearchUser;
         @FXML
         public void toSearchUser(ActionEvent event) throws IOException {
-        	changeScene(event, "view/110SearchUser.fxml");
+        	//esimerkista
+            FXMLLoader loaderi = new FXMLLoader();
+            loaderi.setLocation(MainApp.class.getResource("view/110SearchUser.fxml"));
+            //AnchorPane userhakuruutu = (AnchorPane) loaderi.load();
+
+            // Set it into the center of root layout.
+            //rootLayout.setCenter(userhakuruutu);
+            
+          //changeScene(event, "view/110SearchUser.fxml");
+            // changeScene tekee tän:
+            //Parent wantedScene = FXMLLoader.load(getClass().getResource("view/110SearchUser.fxml"));
+    		//Scene newScene = new Scene (wantedScene);
+    		
+    		//Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    		
+    		//window.setScene(newScene);
+    		//window.show();
+            
+            
+            
+            
+         // Give the controller access to the main app.
+            // Heittaa virhetta tasta:
+            Controller110SearchUser controller = loaderi.getController();
+            controller.setMainApp(this);           
+        	
+        	
+            
         }
+        
+        
+        
     	@FXML
         private Button to120TrainView;
         @FXML
