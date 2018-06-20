@@ -1,7 +1,6 @@
 package varaus;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Application;
@@ -16,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import varaus.model.Asema;
@@ -23,6 +23,7 @@ import varaus.model.Juna;
 import varaus.model.User;
 import varaus.model.UserThread;
 import varaus.view.Controller110SearchUser;
+import varaus.view.Controller111UserEditDialog;
 
 
 
@@ -310,21 +311,52 @@ public class MainApp extends Application {
     		
     		//window.setScene(newScene);
     		//window.show();
-            
-            
-            
-            
+          
          // Give the controller access to the main app.
             // Heittaa virhetta tasta:
             Controller110SearchUser controller = loaderi.getController();
             controller.setMainApp(this);           
-        	
-        	
-            
-        }
+        	        
+        }//SearchUser
         
-        
-        
+        /**
+         * Opens a dialog to edit details for the specified user. If ok
+         * clicked, the changes are saved into the provided person object and true
+         * is returned.
+         * 
+         * @param user the user object to be edited
+         * @return true if the OK is clicked, false otherwise.
+         */
+        public boolean showUserEditDialog(User user) {
+            try {
+                // Load the fxml file and create a new stage for the popup dialog.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/UserEditDialog.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+
+                // Create the dialog Stage.
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Edit User");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(primaryStage);
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+
+                // Set the user into the controller.
+                Controller111UserEditDialog controller = loader.getController();
+                controller.setDialogStage(dialogStage);
+                controller.setUser(user);
+
+                // Show the dialog and wait until the user closes it
+                dialogStage.showAndWait();
+
+                return controller.isOkClicked();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }//showUserEditDialog
+
     	@FXML
         private Button to120TrainView;
         @FXML
@@ -346,7 +378,7 @@ public class MainApp extends Application {
 
     	  	
     	
-    	//*** MAIN METHOD *****
+    	//--------------------------------------------------------------------------*** MAIN METHOD *****
     	
     public static void main(String[] args) {
     	
@@ -365,7 +397,7 @@ public class MainApp extends Application {
 
     	System.out.println("Created test-users " + userData);
     	
-    	//--------------
+    	//---------------------------------------------------------------------------------------------------------------
 
     	
     	// EI Oli alunperin MainAppin konstruktorissa testUserien 

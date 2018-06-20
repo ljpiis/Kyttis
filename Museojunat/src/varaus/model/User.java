@@ -1,6 +1,5 @@
 package varaus.model;
 
-	import java.time.LocalDate;
 	import java.util.ArrayList;
 	import javafx.beans.property.IntegerProperty;
 	import javafx.beans.property.ObjectProperty;
@@ -93,6 +92,7 @@ package varaus.model;
 		public StringProperty lastNameProperty() {
 	        return lastName;
 	    }
+		
 
 		public String getUserId() {
 			return userId.get();
@@ -104,6 +104,7 @@ package varaus.model;
 			return userId;
 		}
 
+		
 		public String getPassword() {
 			return password.get();
 		}
@@ -111,8 +112,22 @@ package varaus.model;
 			this.password.set(password);
 		}
 
+		
 		public boolean isAdmin() {
 			return admin;
+		}
+		public String getSAdmin() {
+			if (admin) { return "Admin";}
+			else { return "--";}
+		}
+		public void setSAdmin(String admin) {
+			if(admin == "true") {
+				setAdmin(true);
+			} else {setAdmin(false);}
+		}
+		public boolean getAdmin() {
+			if (admin) { return true;}
+			else { return false;}
 		}
 		public void setAdmin(boolean admin) {
 			this.admin = admin;
