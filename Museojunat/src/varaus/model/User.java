@@ -34,10 +34,10 @@ package varaus.model;
 	        this.password = null;
 	    }
 	    
-	    public User(String firstName, String lastName, String userId, String password, boolean admin) {
+	    public User(String firstName, String userId, String password, boolean admin) {
 	    	
 	    	this.firstName = new SimpleStringProperty(firstName);
-	    	this.lastName = new SimpleStringProperty(lastName);
+	    	//this.lastName = new SimpleStringProperty(lastName);
 	    	this.userId = new SimpleStringProperty(userId);
 	    	this.password = new SimpleStringProperty(password);
 	    	this.admin = admin;

@@ -31,7 +31,7 @@ import varaus.view.Controller111UserEditDialog;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    //private Scene scene1;
+
     //scene2;
     //*** OBJECTS USED IN THE PROGRAMME ***
     
@@ -44,9 +44,9 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
-    	userData.add(new User("Laasa", "aku", false));
+    	userData.add(new User("Laasa", "Laasa", "aku", false));
     	// creating a test admin 
-    	userData.add(new User("admin", "aku", true));
+    	userData.add(new User("admin", "amin",  "aku", true));
     	
     }
     
@@ -86,8 +86,7 @@ public class MainApp extends Application {
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene1; // tama ylhaalla
-            scene1 = new Scene(rootLayout);
+            Scene scene1 = new Scene(rootLayout);
             primaryStage.setScene(scene1);
             primaryStage.show();
             
@@ -95,10 +94,10 @@ public class MainApp extends Application {
             //scene2 = new Scene(300, 300)
             
         } catch (IOException e) {
-        	System.out.println("Start-metodi");
+        	System.out.println("InitRootLayout-metodi");
             e.printStackTrace();
         }
-    }
+    }//initRootLayout
 
     /**
      * Shows the 000Ruutu inside the root layout.
@@ -130,7 +129,7 @@ public class MainApp extends Application {
     
     
         
-    //****METHODS FOR HANDLING USER REGISTRATION AND LOGGING IN ****
+    //--------------------------------------****METHODS FOR HANDLING USER REGISTRATION AND LOGGING IN ****
     
     //login
     public static boolean logIn(String username, String password) {
@@ -144,8 +143,7 @@ public class MainApp extends Application {
     		return false;
     	}
     }
-    
-    
+        
     	//register a new customer
         public static boolean registerCustomer(String username, String password) {
         	//check if username already exists
@@ -160,7 +158,7 @@ public class MainApp extends Application {
         }
     }
         
-        //------- FXML COMPONENTS ----------- //
+        //-------------------------------------------- FXML COMPONENTS ----------- //
         
         //000Ruutu components
         @FXML
@@ -293,31 +291,19 @@ public class MainApp extends Application {
     	@FXML
         private Button to110SearchUser;
         @FXML
-        public void toSearchUser(ActionEvent event) throws IOException {
-        	//esimerkista
-            FXMLLoader loaderi = new FXMLLoader();
-            loaderi.setLocation(MainApp.class.getResource("view/110SearchUser.fxml"));
-            //AnchorPane userhakuruutu = (AnchorPane) loaderi.load();
+        public void toSearchUser(ActionEvent event){
+        	try {
+                changeScene(event, "view/110SearchUser.fxml");                
 
-            // Set it into the center of root layout.
-            //rootLayout.setCenter(userhakuruutu);
-            
-          //changeScene(event, "view/110SearchUser.fxml");
-            // changeScene tekee tän:
-            //Parent wantedScene = FXMLLoader.load(getClass().getResource("view/110SearchUser.fxml"));
-    		//Scene newScene = new Scene (wantedScene);
-    		
-    		//Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    		
-    		//window.setScene(newScene);
-    		//window.show();
-          
-         // Give the controller access to the main app.
-            // Heittaa virhetta tasta:
-            Controller110SearchUser controller = loaderi.getController();
-            controller.setMainApp(this);           
-        	        
-        }//SearchUser
+                // Give the controller access to the main app.
+                FXMLLoader loader = new FXMLLoader();
+                Controller110SearchUser controller = loader.getController();
+                controller.setMainApp(this);    // nullpointteri tasta? 
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }//toSearchUser
         
         /**
          * Opens a dialog to edit details for the specified user. If ok
@@ -349,7 +335,6 @@ public class MainApp extends Application {
 
                 // Show the dialog and wait until the user closes it
                 dialogStage.showAndWait();
-
                 return controller.isOkClicked();
             } catch (IOException e) {
                 e.printStackTrace();

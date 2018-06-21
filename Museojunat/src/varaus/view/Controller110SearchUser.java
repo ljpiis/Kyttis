@@ -2,6 +2,7 @@ package varaus.view;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -95,9 +96,9 @@ public class Controller110SearchUser {
 	     * 
 	     * @param mainApp
 	     */
-	    public void setMainApp(MainApp mainAppi) {
-	        this.mainApp = mainAppi;
-	        // Add observable list data to the table
+	    public void setMainApp(MainApp mainApp) {
+	        this.mainApp = mainApp;
+	        // Add ObservableList<User> -data to the table
 	        userTable.setItems(mainApp.getUserData());
 	    }
 	    
