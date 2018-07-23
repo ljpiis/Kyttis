@@ -298,7 +298,7 @@ public class MainApp extends Application {
                 // Give the controller access to the main app.
                 FXMLLoader loader = new FXMLLoader();
                 Controller110SearchUser controller = loader.getController();
-                controller.setMainApp(this);    // nullpointteri tasta? 
+                controller.setMainApp(this);  // nullpointteri tasta? 
 
             } catch (IOException e) {
                 e.printStackTrace();
